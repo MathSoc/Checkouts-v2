@@ -1,0 +1,45 @@
+{% set active = 'assets' %}
+{% extends '_layout.jinja2' %}
+{% from '_formhelpers.jinja2' import render_field %}
+{% block title %}
+  {% if created %}
+    New Asset
+  {% else %}
+    Update Asset
+  {% endif %}
+{% endblock %}
+{% block content %}
+  <div class='header'>
+    {% if created %}
+      <h1>New Asset</h1>
+    {% else %}
+      <h1>Update Asset</h1>
+    {% endif %}
+  </div>
+  <div class='content'>
+    {% if created %}
+      <form class='form' method='POST' action='/assets/new'>
+    {% else %}
+      <form class='form' method='POST' action='/assets/{{ pk }}/update'>
+    {% endif %}
+    <dl>
+      {{ render_field(form.name) }}
+      {{ render_field(form.asset_type) }}
+      {{ render_field(form.total) }}
+      {{ render_field(form.created) }}
+    </dl>
+    <button type='submit' class='button primary'>
+      {% if created %}
+        Create
+      {% else %}
+        Update
+      {% endif %}
+    </button>
+    {% if not created %}
+      <a href='/assets/{{ pk }}/remove' class='button primary'>
+        Remove
+      </a>
+    {% endif %}
+    </form>
+  </div>
+{% endblock %}

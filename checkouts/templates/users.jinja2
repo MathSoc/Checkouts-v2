@@ -1,0 +1,56 @@
+{% set active = 'users' %}
+{% extends '_layout.jinja2' %}
+{% import '_pagination.jinja2' as paginator %}
+{% block title %}
+Users
+{% endblock %}
+{% block content %}
+  <div class='header'>
+    <h1>Users</h1>
+  </div>
+  <div class='content'>
+    <div class='search-frame'>
+      <div class='search-box'>
+        <form class='search-form' action='/users' method='GET'>
+          <input name='name' class='form-control' type='text'
+                 placeholder='Leeroy Jenkins, 20431337' />
+          <button type='submit' class='search-btn'>
+            <i class='fa fa-search'></i>
+          </button>
+        </form>
+      </div>
+      <a href='/users/new' class='button primary'>New User</a>
+    </div>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Membership</th>
+          <th>Refunded</th>
+          <th>Open Checkouts</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in obj.items %}
+          <tr>
+            <td>
+              <a href='/users/{{ user._id }}/profile'>
+                {{ user.identifier }}
+              </a>
+            </td>
+            <td>
+              <a href='/users/{{ user._id }}/profile'>
+                {{ user.full_name }}
+              </a>
+            </td>
+            <td>{{ user.membership }}</td>
+            <td>{{ user.refunded }}</td>
+            <td>{{ user.open_checkouts.count() }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {{ paginator.show(obj, '/users?name=%s&' % name) }}
+  </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% set active = 'users' %}
+{% extends '_layout.jinja2' %}
+{% from '_formhelpers.jinja2' import render_field %}
+{% block title %}
+  {% if created %}
+    New User
+  {% else %}
+    Update User
+  {% endif %}
+{% endblock %}
+{% block content %}
+  <div class='header'>
+    {% if created %}
+      <h1>New User</h1>
+    {% else %}
+      <h1>Update User</h1>
+    {% endif %}
+  </div>
+  <div class='content'>
+    {% if created %}
+      <form class='form' method='POST' action='/users/new'>
+    {% else %}
+      <form class='form' method='POST' action='/users/{{ pk }}/update'>
+    {% endif %}
+    <dl>
+      {{ render_field(form.identifier) }}
+      {{ render_field(form.name) }}
+      {{ render_field(form.first_name) }}
+      {{ render_field(form.last_name) }}
+      {{ render_field(form.membership) }}
+      <div class='form-control'>
+        <dt>Refunded Mathsoc Fee?</dt>
+        <dd>{{ form.refunded() | safe }}</dd>
+      </div>
+      {{ render_field(form.created) }}
+    </dl>
+    <button type='submit' class='button primary'>
+      {% if created %}
+        Create
+      {% else %}
+        Update
+      {% endif %}
+    </button>
+    {% if not created %}
+      <a href='/users/{{ pk }}/remove' class='button primary'>
+        Remove
+      </a>
+    {% endif %}
+    </form>
+  </div>
+{% endblock %}

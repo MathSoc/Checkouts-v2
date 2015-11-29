@@ -1,0 +1,90 @@
+# Mac OSX temporary files
+.DS_Store
+.DS_STORE
+.lock-wscript
+**/.DS_Store
+.lock
+.lock-*
+
+# Emacs temporary files
+*~
+
+# Vim temporary files
+*.swp
+
+# Build files
+build/
+dist/
+
+# Python bulid files
+*.py[cod]
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Libraries
+*.lib
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# LaTeX temporary files
+*.aux
+*.log
+*.toc
+*.out
+
+# Doxygen output
+html/
+latex/
+
+# Coverage
+lib-cov
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Logs
+logs
+*.log
+
+# Server files
+*.sock
+*.conf
+*.db
+*.sqlite
+
+# Generated files
+*.css.map
+.sass-cache/

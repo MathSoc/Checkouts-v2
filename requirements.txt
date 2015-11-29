@@ -1,0 +1,7 @@
+flask == 0.10.1
+flask-restful == 0.3.4
+flask-sqlalchemy == 2.0
+sqlalchemy-utils == 0.30.17
+pytz == 2015.4
+wtforms == 2.0.2
+tzlocal == 1.2

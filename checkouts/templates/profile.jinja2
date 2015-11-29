@@ -1,0 +1,79 @@
+{% extends '_layout.jinja2' %}
+{% import '_pagination.jinja2' as paginator %}
+{% block title %}
+  {{ user.full_name }}
+{% endblock %}
+{% block content %}
+  <div class='header'>
+    <h1>{{ user.full_name }}</h1>
+  </div>
+  <div class='content'>
+    <div class='buttons inline-block'>
+      <div class='right'>
+        <a class='button primary' href='/users/{{ user._id }}/update'>
+          Edit User
+        </a>
+        <a class='button primary' href='/users/{{ user._id }}/remove'>
+          Delete User
+        </a>
+      </div>
+    </div>
+    <h3>Information</h3>
+    <table class='table'>
+      <tbody>
+        <tr>
+          <td>Id</td>
+          <td>{{ user.identifier }}</td>
+        </tr>
+        <tr>
+          <td>Membership</td>
+          <td>{{ user.membership }}</td>
+        </tr>
+        <tr>
+          <td>Refunded Fee</td>
+          <td>{{ user.refunded }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br/>
+    <br/>
+    <h3>Checkouts</h3>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Borrower</th>
+          <th>Checkout Time</th>
+          <th>Checkin Time</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for checkout in obj.items %}
+          <tr>
+            <td>{{ checkout.asset.name }}</td>
+            <td>{{ checkout.user.full_name }}</td>
+            <td>{{ checkout.checkout_date }}</td>
+            <td>
+              {% if checkout.checkin_time %}
+                {{ checkout.checkin_date }}
+              {% else %}
+                <a class='button secondary'
+                   href='/checkouts/{{ checkout._id }}/checkin'>
+                  Check In
+                </a>
+              {% endif %}
+            </td>
+            <td>
+              <a class='button secondary'
+                 href='/checkouts/{{ checkout._id }}/remove'>
+                Delete
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {{ paginator.show(obj, '/checkouts?returned=%s&' % returned) }}
+  </div>
+{% endblock %}

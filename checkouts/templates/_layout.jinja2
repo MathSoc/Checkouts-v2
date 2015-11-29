@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>{% block title %}Checkouts{% endblock %}</title>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1' />
+    <link rel='icon' type='image/png' href='/static/images/mathsoclogo.png' />
+    <link rel='stylesheet' type='text/css' href='/static/stylesheets/font-awesome.min.css' />
+    <link rel='stylesheet' type='text/css' href='/static/stylesheets/checkouts.css' />
+    {% block stylesheets %}
+    {% endblock %}
+    {% block javascript %}
+    {% endblock %}
+  </head>
+  <body>
+    <div class='wrapper'>
+      <div class='toolbar'>
+        <div class='banner'>
+          <img src='/static/images/mathsoclogo.png' alt='mathsoc logo' />
+        </div>
+        <ul>
+          <li class='head'>Navigation</li>
+          <li class='{% if active == "assets" %}active{% endif %}'>
+            <a href='/assets'>Assets</a>
+          </li>
+          <li class='{% if active == "checkouts" %}active{% endif %}'>
+            <a href='/checkouts'>Checkouts</a>
+          </li>
+          <li class='{% if active == "users" %}active{% endif %}'>
+            <a href='/users'>Users</a>
+          </li>
+        </ul>
+        <div class='absolute'>
+          <span>Made with </span>
+          <i class='fa fa-heart'></i>
+        </div>
+      </div>
+      <div class='container'>
+        {% block content %}
+        {% endblock %}
+      </div>
+  </body>
+</html>

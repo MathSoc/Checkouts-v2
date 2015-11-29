@@ -1,0 +1,106 @@
+{% set active = 'checkouts' %}
+{% extends '_layout.jinja2' %}
+{% from '_formhelpers.jinja2' import render_field %}
+{% block javascript %}
+  <script type='text/javascript' src='/static/javascript/ajax.js'>
+  </script>
+  <script type='text/javascript'
+          src='/static/javascript/auto-complete.min.js'>
+  </script>
+  <script type='text/javascript' src='/static/javascript/suggestion.js'>
+  </script>
+{% endblock %}
+{% block stylesheets %}
+  <link rel='stylesheet'
+        type='text/css'
+        href='/static/stylesheets/auto-complete.css' />
+{% endblock %}
+{% block title %}
+  {% if not user %}
+    Select User
+  {% else %}
+    Select Asset
+  {% endif %}
+{% endblock %}
+{% block content %}
+  <div class='header'>
+    {% if not user %}
+      <h1>Select User</h1>
+    {% else %}
+      <h1>Select Asset</h1>
+    {% endif %}
+  </div>
+  <div class='content'>
+    {% if not user %}
+      <h3>Select Existing User</h3>
+      <div class='search-frame'>
+        <div class='search-box'>
+          <form>
+            <input name='name' class='form-control' type='text'
+                   placeholder='Leeroy Jenkins, 20431337'
+                   data-suggest='true' data-url='/checkouts/{}/new'
+                   data-resource='users' data-target='search-confirm' />
+          </form>
+        </div>
+        <a id='search-confirm' href='#' class='button primary'>
+          Choose User
+        </a>
+      </div>
+      <br/>
+      <br/>
+      <h3>New User</h3>
+      <form class='form' method='POST' action='/checkouts/new'>
+        <dl>
+          {{ render_field(form.identifier) }}
+          {{ render_field(form.name) }}
+          {{ render_field(form.first_name) }}
+          {{ render_field(form.last_name) }}
+          {{ render_field(form.membership) }}
+          <div class='form-control'>
+            <dt>Refunded Mathsoc Fee?</dt>
+            <dd>{{ form.refunded() | safe }}</dd>
+          </div>
+          {{ render_field(form.created) }}
+        </dl>
+        <button type='submit' class='button primary'>Create</button>
+      </form>
+    {% else %}
+      <h3>Select Existing Asset</h3>
+      <p style='margin: 0'>
+        Select an asset to checkout to {{ user.full_name }}.
+      </p>
+      <div class='search-frame'>
+        <div class='search-box'>
+          <form>
+            <input name='name' class='form-control' type='text'
+                   placeholder='Calculus 7E - Early Transcendentals'
+                   data-suggest='true'
+                   data-url='/checkouts/{{ user._id }}/new/{}'
+                   data-resource='assets'
+                   data-target='search-confirm' />
+          </form>
+        </div>
+        <a id='search-confirm' href='#' class='button primary'>
+          Choose Asset
+        </a>
+      </div>
+      <br/>
+      <br/>
+      <h3>New Asset</h3>
+      <p style='margin: 0'>
+        Create a new asset to checkout to {{ user.full_name }}.
+      </p>
+      <form class='form'
+            method='POST'
+            action='/checkouts/{{ user._id }}/new'>
+        <dl>
+          {{ render_field(form.name) }}
+          {{ render_field(form.asset_type) }}
+          {{ render_field(form.total) }}
+          {{ render_field(form.created) }}
+        </dl>
+        <button type='submit' class='button primary'>Create</button>
+      </form>
+    {% endif %}
+  </div>
+{% endblock %}

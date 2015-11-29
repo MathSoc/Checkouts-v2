@@ -1,0 +1,21 @@
+{% macro show(pagination, url) %}
+  <div class='pagination'>
+    {% if pagination.page > 1 %}
+      <span class='prev'>
+        <a href='{{ url }}page={{ pagination.page - 1 }}'>
+          <i class='fa fa-arrow-circle-o-left'></i>
+        </a>
+      </span>
+    {% endif %}
+    <span>
+      Page {{ pagination.page }}
+    </span>
+    {% if pagination.has_next %}
+      <span class='next'>
+        <a href='{{ url }}page={{ pagination.page + 1}}'>
+          <i class='fa fa-arrow-circle-o-right'></i>
+        </a>
+      </span>
+    {% endif %}
+  </div>
+{% endmacro %}

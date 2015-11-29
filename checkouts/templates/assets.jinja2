@@ -1,0 +1,52 @@
+{% set active = 'assets' %}
+{% extends '_layout.jinja2' %}
+{% import '_pagination.jinja2' as paginator %}
+{% block title %}
+Assets
+{% endblock %}
+{% block content %}
+  <div class='header'>
+    <h1>Assets</h1>
+  </div>
+  <div class='content'>
+    <div class='search-frame'>
+      <div class='search-box'>
+        <form class='search-form' action='/assets' method='GET'>
+          <input name='name' class='form-control' type='text'
+                 placeholder='Calculus 7E - Early Transcendentals' />
+          <button type='submit' class='search-btn'>
+            <i class='fa fa-search'></i>
+          </button>
+        </form>
+      </div>
+      <a href='/assets/new' class='button primary inline-block'>
+        New Asset
+      </a>
+    </div>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Stock</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for asset in obj.items %}
+          <tr>
+            <td>
+              <a href='/assets/{{ asset._id }}/update'>
+                {{ asset.name }}
+              </a>
+            </td>
+            <td>{{ asset.asset_type }}</td>
+            <td>{{ asset.stock }}</td>
+            <td>{{ asset.total }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {{ paginator.show(obj, '/assets?name=%s&' % name) }}
+  </div>
+{% endblock %}
