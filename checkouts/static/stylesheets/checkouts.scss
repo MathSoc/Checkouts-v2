@@ -265,12 +265,16 @@ ul {
 .search-frame,
 .buttons {
   width: 100%;
-  margin-bottom: 10px;
+  padding: 5px 0px 15px;
   .button {
     font-size: 13px;
     padding: 10px;
     display: inline-block;
   }
+}
+
+.buttons {
+  padding-bottom: 13px;
 }
 
 .pagination {
@@ -309,9 +313,7 @@ ul {
 .search-frame {
   width: 100%;
   display: block;
-  margin-bottom: 0;
   position: relative;
-  padding: 5px 0px 15px;
   box-sizing: border-box;
   .button {
     top: 5px;

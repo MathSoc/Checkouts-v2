@@ -209,12 +209,15 @@ ul.inline-list {
 .search-frame,
 .buttons {
   width: 100%;
-  margin-bottom: 10px; }
+  padding: 5px 0px 15px; }
   .search-frame .button,
   .buttons .button {
     font-size: 13px;
     padding: 10px;
     display: inline-block; }
+
+.buttons {
+  padding-bottom: 13px; }
 
 .pagination {
   width: 100%;
@@ -246,9 +249,7 @@ ul.inline-list {
 .search-frame {
   width: 100%;
   display: block;
-  margin-bottom: 0;
   position: relative;
-  padding: 5px 0px 15px;
   box-sizing: border-box; }
   .search-frame .button {
     top: 5px;
