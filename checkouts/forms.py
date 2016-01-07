@@ -17,6 +17,10 @@ class AssetForm(wtforms.Form):
         wtforms.validators.AnyOf(dict(Asset.ASSET_TYPE).keys()),
     ), choices=Asset.ASSET_TYPE)
 
+    owner = wtforms.SelectField('Club Owner', (
+        wtforms.validators.AnyOf(dict(Asset.OWNER_TYPE).keys()),
+    ), choices=Asset.OWNER_TYPE)
+
     created = wtforms.HiddenField('Created')
 
     def validate_name(form, field):

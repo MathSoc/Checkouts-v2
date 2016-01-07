@@ -67,9 +67,15 @@ class Asset(db.Model):
         ('other', 'Other'),
     )
 
+    OWNER_TYPE = (
+        ('mathsoc', 'MathSoc'),
+        ('watsfic', 'Watsfic'),
+    )
+
     _id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True)
     asset_type = db.Column(ChoiceType(ASSET_TYPE))
+    owner = db.Column(ChoiceType(OWNER_TYPE))
 
     # Keeps track of how many the given asset are in total in
     # inventory.  This is different than stock, which is how many we
