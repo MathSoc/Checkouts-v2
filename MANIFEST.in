@@ -1,0 +1,2 @@
+recursive-include checkouts/templates *
+recursive-include checkouts/static *

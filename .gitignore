@@ -88,3 +88,7 @@ logs
 # Generated files
 *.css.map
 .sass-cache/
+
+# Packaging
+venv
+all-packages.txt
